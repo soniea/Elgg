@@ -15,22 +15,13 @@
  * @package db_record
  */
 
-class db_record
+abstract class db_record
 {
 	protected $table_name;
 	protected $primary_key;
 	protected $elements=array();
 	
-	public function __construct( $table, $id=NULL, $primary_key='id' )
-	{
-		$this->table_name = $table;
-
-		// set primary key
-		$this->primary_key = $primary_key;
-
-		// get desired row
-		$this->elements = $this->retrieve( $id );
-	}
+	abstract public function __construct();
 	
 	public function get_id()
 	{

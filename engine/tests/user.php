@@ -58,6 +58,6 @@ class ElggCoreUserTest extends ElggCoreUnitTest
 					('$user_id', '$name', '$username', md5('$password'), '$salt', 'unit@test.com', md5('userTest'), '$last_action', '$prev_last_action', '$last_login', '$prev_last_login')";
 		insert_data( $sql );
 
-		$this->user = new db_record( 'elggusers_entity', $user_id, 'guid' );
+		$this->user = new User( $user_id );
 	}
 }
