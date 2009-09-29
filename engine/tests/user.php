@@ -3,6 +3,7 @@
 class ElggCoreUserTest extends ElggCoreUnitTest
 {
 	protected $db_prefix;
+	protected $user;
 
 	public function __construct()
 	{

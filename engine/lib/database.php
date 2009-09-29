@@ -342,28 +342,6 @@
        				
             return false;
         }
-
-	function get_data_array( $query, $callback='' )
-	{
-		if ( !$data = get_data( $query, $callback ))
-		{
-			return FALSE;
-		}
-
-		$i = 0;
-		$fields = array();
-		foreach ( $data as $rows )
-		{
-			foreach ( $rows as $column => $value )
-			{
-				$fields[$i][$column] = $value;
-			}
-
-			$i++;
-		}
-
-		return $fields;
-	}
         
     /**
      * Use this function to insert database data; returns id or false

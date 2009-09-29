@@ -53,7 +53,7 @@ class db_record
 		
 		$attributes = implode( ', ', array_keys( $this->elements ));
 		$values = implode( '", "', $this->elements );
-		if ( !get_data_array( "INSERT INTO `$this->table_name` ($attributes) VALUES (\"$values\")" ))
+		if ( !insert_data( "INSERT INTO `$this->table_name` ($attributes) VALUES (\"$values\")" ))
 		{
 			return FALSE;
 		}
@@ -63,15 +63,20 @@ class db_record
 	
 	public function retrieve( $id )
 	{
-		if ( $rset = get_data_array( "SELECT * FROM `$this->table_name` WHERE `$this->primary_key` = \"$id\"" ))
-		{
-			return $rset[0];
-		}
-		
 		$elements = array();
-		foreach ( get_data_array( "SHOW COLUMNS FROM `$this->table_name`" ) as $row )
+		if ( $row = get_data_row( "SELECT * FROM `$this->table_name` WHERE `$this->primary_key` = \"$id\"" ))
 		{
-			$elements[$row['Field']] = $row['Default'];
+			foreach ( $row as $element => $value )
+			{
+				$elements[$element] = $value;
+			}
+		}
+		else
+		{
+			foreach ( get_data( "SHOW COLUMNS FROM `$this->table_name`" ) as $row )
+			{
+				$elements[$row->Field] = $row->Default;
+			}
 		}
 		
 		return $elements;
@@ -82,12 +87,12 @@ class db_record
 		$this->set_elements( $elements );
 		
 		$values = get_sql_update_values( $this->elements );
-		return get_data_array( "UPDATE `$this->table_name` SET $values WHERE `$this->primary_key` = \"{$this->get_id()}\"" );
+		return update_data( "UPDATE `$this->table_name` SET $values WHERE `$this->primary_key` = \"{$this->get_id()}\"" );
 	}
 	
 	public function delete()
 	{
-		if ( !get_data_array( "DELETE FROM `$this->table_name` WHERE `$this->primary_key` = \"{$this->get_id()}\"" ))
+		if ( !delete_data( "DELETE FROM `$this->table_name` WHERE `$this->primary_key` = \"{$this->get_id()}\"" ))
 		{
 			return FALSE;
 		}
