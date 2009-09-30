@@ -92,12 +92,6 @@
 			'NotificationException:NoEmailAddress' => "Could not get the email address for GUID:%d",
 			'NotificationException:MissingParameter' => "Missing a required parameter, '%s'",
 			
-			'DatabaseException:WhereSetNonQuery' => "Where set contains non WhereQueryComponent",
-			'DatabaseException:SelectFieldsMissing' => "Fields missing on a select style query",
-			'DatabaseException:UnspecifiedQueryType' => "Unrecognised or unspecified query type.",
-			'DatabaseException:NoTablesSpecified' => "No tables specified for query.",
-			'DatabaseException:NoACL' => "No access control was provided on query",
-			
 			'InvalidParameterException:NoEntityFound' => "No entity found, it either doesn't exist or you don't have access to it.",
 			
 			'InvalidParameterException:GUIDNotFound' => "GUID:%s could not be found, or you can not access it.",
