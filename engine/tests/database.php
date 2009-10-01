@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Elgg Core Query Test
+ * Elgg Core Database Test
  *
  * @package Elgg
  * @subpackage Unit Test
@@ -9,7 +9,7 @@
  * @link http://elgg.org
  * @since Version 1.7
  */
-class ElggCoreQueryTest extends ElggCoreUnitTest
+class ElggCoreDatabaseTest extends ElggCoreUnitTest
 {
 	public function testMySqlDriverConnection()
 	{

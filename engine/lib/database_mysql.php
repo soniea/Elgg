@@ -9,7 +9,7 @@
  * @link http://elgg.org
  * @since Version 1.7
  */
-class MySqlDriver extends Query
+class MySqlDriver extends ElggDatabase
 {
 	protected $persistent_connection=TRUE;
 	protected $link_identifier;
