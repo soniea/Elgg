@@ -20,8 +20,16 @@ class ElggCoreDatabaseTest extends ElggCoreUnitTest
 		$this->invalid_mysql_database();
 
 		// ensure proper connection
-		$query = new MySqlDriver();
-		$this->assertIsA( $query, 'MySqlDriver' );
+		$database = new MySqlDriver();
+		$this->assertIsA( $database, 'MySqlDriver' );
+	}
+	
+	public function testMySqlDriverSelectQuery()
+	{
+		$database = new MySqlDriver();
+		
+		$result = $database->query( "SELECT * FROM elggsites_entity WHERE guid = '1'" );
+		$this->assertIsA( $result, 'Array' );
 	}
 
 
@@ -59,7 +67,7 @@ class ElggCoreDatabaseTest extends ElggCoreUnitTest
 	{
 		try
 		{
-			$query = new MySqlDriver();
+			$database = new MySqlDriver();
 			$this->assertTrue( FALSE );
 		}
 		catch ( Exception $e )
