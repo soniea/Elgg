@@ -23,13 +23,21 @@ class ElggCoreDatabaseTest extends ElggCoreUnitTest
 		$database = new MySqlDriver();
 		$this->assertIsA( $database, 'MySqlDriver' );
 	}
-	
+
 	public function testMySqlDriverSelectQuery()
 	{
+		global $CONFIG;
 		$database = new MySqlDriver();
-		
-		$result = $database->query( "SELECT * FROM elggsites_entity WHERE guid = '1'" );
+
+		$query = sprintf( "SELECT * FROM %ssites_entity WHERE guid = '%d'", $CONFIG->dbprefix, $CONFIG->site->getGUID() );
+		$result = $database->query( $query );
+
 		$this->assertIsA( $result, 'Array' );
+		$this->assertIdentical( $result[0]['name'], $CONFIG->site->name );
+		$this->assertIdentical( $result[0]['description'], $CONFIG->site->description );
+		$this->assertIdentical( $result[0]['url'], $CONFIG->site->url );
+
+		$this->assertIdentical( $result, $database->get_data( $query ));
 	}
 
 
